@@ -96,3 +96,29 @@ document.querySelectorAll('.btn-group button').forEach(button => {
 
 // Charger les tâches au chargement de la page
 document.addEventListener('DOMContentLoaded', loadTodos);
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionnez tous les boutons de suppression
+    const deleteButtons = document.querySelectorAll('.btn-danger');
+
+    // Ajoutez un écouteur d'événement à chaque bouton de suppression
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            // Stockez le bouton de suppression cliqué
+            const deleteButton = this;
+            // Affichez le modal de confirmation
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+
+            // Gérez l'événement de confirmation de suppression
+            document.getElementById('confirmDelete').addEventListener('click', function() {
+                // Supprimez la tâche
+                deleteButton.closest('.todo').remove();
+                // Fermez le modal
+                deleteModal.hide();
+            });
+        });
+    });
+});
+
